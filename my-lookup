@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+#Rene Sanchez - 2018118383 - CMPS4232 - Test 2
+
+#Text File Name and Last Name
+File=${1}
+Name=${2}
+
+#Checking if the 2 parameters are not provided and if the text file name doesn't end with .txt
+if [[ $# -lt 2 || $# -gt 2 || $1 != *".txt" ]]; then
+	echo "You must provide two arguments for this script to work."
+	echo "Usage: my-lookup <filename.txt> <name>"
+	echo "File name must end with .txt"
+else
+	#if the file exists and if it's a regular file or not
+	if [ -f "$File" ]; then
+		echo "Searching for *$Name*:"
+		echo " "
+		#grep returns names and the name being searched for
+		grep -P "^[a-zA-Z]+(?: [a-zA-z]+)* ($Name)$" $File
+		echo " "
+		echo "Goodbye!"
+	else
+		"$File was not found."
+	fi
+fi
